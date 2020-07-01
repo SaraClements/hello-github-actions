@@ -25,5 +25,8 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
-        cat $GITHUB_EVENT_PATH
-        echo ${{github.event.issue.url}}
+        curl -x POST \
+        -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" \
+        ${{github.event.issue.url}}/labels \
+        -d '{"labels": ["bug"]}'
+        
